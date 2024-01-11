@@ -24,7 +24,9 @@ class RouteServiceProvider extends ServiceProvider
         $this->routes(function () {
             Route::middleware([
                 \App\Api\Base\Middlewares\ApiExceptionMiddleware::class,
-            ])->prefix('/api/result/v1')
+            ])
+                ->as('api.result.')
+                ->prefix('/api/result/v1')
                 ->group(base_path('app/Api/Result/V1/Routes/api.php'));
         });
     }
