@@ -1,0 +1,165 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Tribe - Result API",
+        "description": "Result API",
+        "version": "1"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000",
+            "description": "Local"
+        }
+    ],
+    "paths": {
+        "/api/result/v1/add": {
+            "post": {
+                "tags": [
+                    "result"
+                ],
+                "summary": "Добавление результата",
+                "description": "result add",
+                "operationId": "ResultAdd",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "title": "Email",
+                                        "type": "string",
+                                        "example": "example@email.com"
+                                    },
+                                    "milliseconds": {
+                                        "title": "Milliseconds",
+                                        "type": "number",
+                                        "example": "1000"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful or error operations",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "data": {},
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ok"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/result/v1/get-top-ten": {
+            "get": {
+                "tags": [
+                    "result"
+                ],
+                "summary": "Топ 10 лучших результатов",
+                "description": "result top ten",
+                "operationId": "ResultGetTopTen",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "required": true,
+                        "example": "example@email.com"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful or error operations",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "top": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/ResultTopDto"
+                                                    }
+                                                },
+                                                "self": {
+                                                    "$ref": "#/components/schemas/ResultTopDto"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ok"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ResultDto": {
+                "title": "Результат",
+                "properties": {
+                    "member_id": {
+                        "description": "Id of member",
+                        "type": "number",
+                        "example": "1"
+                    },
+                    "milliseconds": {
+                        "description": "Миллисекунды",
+                        "type": "number",
+                        "example": "1000"
+                    }
+                },
+                "type": "object"
+            },
+            "ResultTopDto": {
+                "title": "Топовый результат",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "example": "example@email.com"
+                    },
+                    "place": {
+                        "description": "Место в рейтинге",
+                        "type": "number",
+                        "example": "1"
+                    },
+                    "milliseconds": {
+                        "description": "Миллисекунды",
+                        "type": "number",
+                        "example": "1000"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
