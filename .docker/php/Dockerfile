@@ -16,7 +16,6 @@ RUN docker-php-ext-install \
         xsl \
         bcmath \
         opcache \
-        sockets \
         mysqli
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
@@ -34,11 +33,10 @@ COPY ./backend/composer.json ./backend/composer.lock ./
 RUN composer install #--no-scripts --no-autoloader
 
 RUN useradd --user-group --system --create-home --no-log-init www
-RUN chown -R www-data:www-data storage
-RUN chmod -R 777 storage
-RUN chown -R www-data:www-data bootstrap/cache
-
-RUN cd /var/www/html/backend/storage && ls -l *
+RUN usermod -u 1000 www-data
+#RUN chown -R www-data:www-data storage
+#RUN chmod -R 777 storage
+#RUN chown -R www-data:www-data bootstrap/cache
 
 CMD ["php-fpm"]
 

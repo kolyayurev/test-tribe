@@ -19,7 +19,7 @@ class ResultFactory extends Factory
     {
         return [
             'member_id' => Member::query()->inRandomOrder()->first()->id,
-            'milliseconds' => fake()->numberBetween(int2: 100000)
+            'milliseconds' => fake()->numberBetween(int2: 100000),
         ];
     }
 }

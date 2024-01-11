@@ -1,18 +1,19 @@
 <?php
 
 return [
-    'default' => 'default',
+    'default' => 'result',
     'documentations' => [
-        'default' => [
+        'result' => [
             'api' => [
-                'title' => 'L5 Swagger UI',
+                'title' => 'Tribe Test',
             ],
 
             'routes' => [
                 /*
                  * Route for accessing api documentation interface
                 */
-                'api' => 'api/documentation',
+                'api' => 'api/result/documentation',
+                'docs' => storage_path('api-docs/result'),
             ],
             'paths' => [
                 /*
@@ -23,12 +24,12 @@ return [
                 /*
                  * File name of the generated json documentation file
                 */
-                'docs_json' => 'api-docs.json',
+                'docs_json' => 'api-result-docs.json',
 
                 /*
                  * File name of the generated YAML documentation file
                 */
-                'docs_yaml' => 'api-docs.yaml',
+                'docs_yaml' => 'api-result-docs.yaml',
 
                 /*
                 * Set this to `json` or `yaml` to determine which documentation file to use in UI
@@ -39,7 +40,7 @@ return [
                  * Absolute paths to directory containing the swagger annotations are stored.
                 */
                 'annotations' => [
-                    base_path('app'),
+                    base_path('app/Api/Result/V1'),
                 ],
 
             ],
@@ -295,6 +296,8 @@ return [
          */
         'constants' => [
             'L5_SWAGGER_CONST_HOST' => env('L5_SWAGGER_CONST_HOST', 'http://my-default-host.com'),
+
+            'LOCAL_HOST' => 'http://localhost:8000',
         ],
     ],
 ];
