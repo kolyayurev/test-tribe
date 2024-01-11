@@ -1,6 +1,5 @@
 <?php
 
-
 use App\Api\Result\V1\Dto\ResultDto;
 use App\Api\Result\V1\Services\ResultService;
 use App\Models\Member;
