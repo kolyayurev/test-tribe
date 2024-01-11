@@ -15,6 +15,9 @@ class Result extends Model
         'milliseconds',
     ];
 
+    /**
+     * @return BelongsTo<Member,Result>
+     */
     public function member(): BelongsTo
     {
         return $this->belongsTo(Member::class, 'member_id', 'id');

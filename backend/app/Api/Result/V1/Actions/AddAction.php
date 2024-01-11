@@ -89,7 +89,7 @@ class AddAction extends BaseActionAbstract
 
         $this->service->store(ResultDto::fillFromArray([
             'member_id' => $member?->id,
-            'milliseconds' => data_get($this->validated, 'milliseconds')
+            'milliseconds' => data_get($this->validated, 'milliseconds'),
         ]));
 
         return null;

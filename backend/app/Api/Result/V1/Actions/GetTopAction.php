@@ -11,9 +11,8 @@ class GetTopAction extends BaseActionAbstract
 {
     public function __construct(
         protected ResultRepositoryContract $resultRepository,
-        protected MemberRepository         $memberRepository
-    )
-    {
+        protected MemberRepository $memberRepository
+    ) {
     }
 
     public function getRules(): array
@@ -44,7 +43,9 @@ class GetTopAction extends BaseActionAbstract
      *
      *          @OA\MediaType(
      *              mediaType="application/json",
+     *
      *              @OA\Schema(
+     *
      *                  @OA\Property(
      *                      property="status",
      *                      type="string",
@@ -56,10 +57,12 @@ class GetTopAction extends BaseActionAbstract
      *                      @OA\Property(
      *                          property="top",
      *                          type="array",
+     *
      *                          @OA\Items(
      *                              ref="#/components/schemas/ResultTopDto"
      *                          ),
      *                      ),
+     *
      *                      @OA\Property(
      *                           property="self",
      *                           ref="#/components/schemas/ResultTopDto",
@@ -88,16 +91,18 @@ class GetTopAction extends BaseActionAbstract
                 );
                 $topTen = $topTen->map(function ($item) {
                     $item->email = mask_email($item->email);
+
                     return $item->toArray();
                 });
 
                 $self = $this->resultRepository->getTopOneByMember(
                     memberId: $member?->id,
                 );
-//                dd($self);
+
+                //                dd($self);
                 return [
                     'top' => $topTen->toArray(),
-                    'self' => $self?->toArray()
+                    'self' => $self?->toArray(),
                 ];
             });
 

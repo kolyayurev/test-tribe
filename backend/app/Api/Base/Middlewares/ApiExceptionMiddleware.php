@@ -14,8 +14,6 @@ use function response;
 class ApiExceptionMiddleware
 {
     /**
-     * @param Request $request
-     * @param Closure $next
      * @return JsonResponse|mixed
      */
     public function handle(Request $request, Closure $next)

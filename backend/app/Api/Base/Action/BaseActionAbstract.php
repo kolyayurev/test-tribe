@@ -85,11 +85,7 @@ abstract class BaseActionAbstract
     }
 
     /**
-     * @param array<mixed>|null $data
-     * @param string $status
-     * @param string $text
-     * @param int $code
-     * @return JsonResponse
+     * @param  array<mixed>|null  $data
      */
     public function response(?array $data, string $status, string $text, int $code = 200): JsonResponse
     {
@@ -101,8 +97,7 @@ abstract class BaseActionAbstract
     }
 
     /**
-     * @param array<mixed>|null $data
-     * @return JsonResponse
+     * @param  array<mixed>|null  $data
      */
     public function success(?array $data = null): JsonResponse
     {
@@ -114,7 +109,6 @@ abstract class BaseActionAbstract
         return $this->response(null, self::STATUS_ERROR, $text, $code);
     }
 
-
     /**
      * @return array<string,mixed>
      */
@@ -122,6 +116,7 @@ abstract class BaseActionAbstract
     {
         return $this->rules;
     }
+
     /**
      * @return array<string,string>
      */

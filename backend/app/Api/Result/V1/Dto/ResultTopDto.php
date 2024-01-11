@@ -18,8 +18,6 @@ class ResultTopDto extends BaseDtoAbstract
      *     example="example@email.com",
      *     type="string",
      * )
-     *
-     * @var string
      */
     public string $email;
 
@@ -30,8 +28,6 @@ class ResultTopDto extends BaseDtoAbstract
      *     type="number",
      *     example="1",
      * )
-     *
-     * @var int
      */
     public int $place;
 
@@ -42,9 +38,6 @@ class ResultTopDto extends BaseDtoAbstract
      *     type="number",
      *     example="1000",
      * )
-     *
-     * @var int
      */
     public int $milliseconds;
-
 }

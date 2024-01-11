@@ -2,23 +2,20 @@
 
 namespace App\Repositories;
 
-use App\Models\Result;
-use Illuminate\Support\Collection;
-use Illuminate\Database\Query\Builder;
-use Illuminate\Support\Facades\DB;
 use App\Api\Result\V1\Dto\ResultTopDto;
+use App\Models\Result;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @extends BaseRepository<Result>
- *
  */
 class ResultRepository extends BaseRepository implements ResultRepositoryContract
 {
     protected string $model = Result::class;
 
     /**
-     * @param int|null $exceptMemberId
-     * @param int $limit
      * @return Collection<int, ResultTopDto>
      */
     public function getTopExceptMember(?int $exceptMemberId = null, int $limit = 10): Collection
@@ -28,7 +25,7 @@ class ResultRepository extends BaseRepository implements ResultRepositoryContrac
                 ->select([
                     'email',
                     'place',
-                    'milliseconds'
+                    'milliseconds',
                 ])
                 ->fromSub(
                     $this->calculatePlaceQuery(),
@@ -43,7 +40,6 @@ class ResultRepository extends BaseRepository implements ResultRepositoryContrac
     }
 
     /**
-     * @param int|null $memberId
      * @return ?ResultTopDto
      */
     public function getTopOneByMember(?int $memberId = null): ?ResultTopDto
@@ -52,7 +48,7 @@ class ResultRepository extends BaseRepository implements ResultRepositoryContrac
             ->select([
                 'email',
                 'place',
-                'milliseconds'
+                'milliseconds',
             ])
             ->fromSub(
                 $this->calculatePlaceQuery(),
@@ -74,7 +70,7 @@ class ResultRepository extends BaseRepository implements ResultRepositoryContrac
                     'r1.member_id',
                     'r1.email',
                     'r1.milliseconds',
-                    DB::raw('@position := @position + 1 AS place')
+                    DB::raw('@position := @position + 1 AS place'),
                 ])
                 ->joinSub(
                     DB::query()
@@ -82,13 +78,12 @@ class ResultRepository extends BaseRepository implements ResultRepositoryContrac
                         ->select([
                             'results.member_id',
                             'members.email',
-                            DB::raw('MIN(results.milliseconds) as milliseconds')
+                            DB::raw('MIN(results.milliseconds) as milliseconds'),
                         ])
                         ->leftJoin('members', 'results.member_id', '=', 'members.id')
                         ->whereNotNull('results.member_id')
                         ->groupBy('results.member_id')
-                        ->orderBy('milliseconds')
-                    ,
+                        ->orderBy('milliseconds'),
                     'r1',
                     function ($join) {
                         $join->on(DB::raw(1), '=', DB::raw(1));

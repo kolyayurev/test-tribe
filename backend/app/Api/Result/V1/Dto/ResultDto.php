@@ -31,9 +31,6 @@ class ResultDto extends BaseDtoAbstract
      *     type="number",
      *     example="1000",
      * )
-     *
-     * @var int
      */
     public int $milliseconds;
-
 }

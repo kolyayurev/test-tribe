@@ -3,15 +3,14 @@
 namespace App\Exceptions;
 
 use App\Api\Base\Action\BaseActionAbstract;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 use Symfony\Component\Routing\Exception\MethodNotAllowedException;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
 class Handler extends ExceptionHandler
 {
-
     /**
      * A list of the exception types that are not reported.
      *

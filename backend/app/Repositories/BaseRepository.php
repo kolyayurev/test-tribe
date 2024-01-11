@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 abstract class BaseRepository
 {
-
     protected string $model;
 
     /**
@@ -18,14 +17,11 @@ abstract class BaseRepository
      */
     public function query(): Builder
     {
-        return  app($this->model)->query();
+        return app($this->model)->query();
     }
 
-    /**
-     * @return Model|null
-     */
     public function find(int $id): ?Model
     {
-        return $this->query->find($id);
+        return $this->query()->find($id);
     }
 }
